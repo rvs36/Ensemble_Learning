@@ -12,5 +12,5 @@ Group Members:
  
   - The main folder contains the template script (Name kept as recieved) - **this is the main handover file**, and the readme file
   - The **Data** folder contains the various data files required to replicate the results
-  - The **Supporting files** folder contains the notebook files which we have  used to do the various analysis and hence reach towads the most optimum results. (Added here just for your reference)
+  - The **Supporting files** folder contains the notebook files which we have  used to do the various analysis and hence reach towads the most optimum results. (Added here just for your reference). It also includes th code for the predictios made using the image part.
  Please reach out to us if you face any troubles with any of the files.
