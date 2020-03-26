@@ -34,6 +34,10 @@ from sklearn.tree import DecisionTreeClassifier
 
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -344,16 +348,19 @@ MODEL - 5 ADA Boost Classifier
 """
 def model_ADABoost(X_train, X_test, y_train, y_test):
 
+    # Different depth decision trees as base_estimator
+    base_estimator = [DecisionTreeClassifier(criterion="entropy", max_depth= i) for i in [2, 4, 8, 10]]
     
-    # Number of trees in random forest
-    n_estimators = [int(x) for x in np.linspace(30, 250, num = 20)]
+    # Number of trees in Adaboost
+    n_estimators = [x for x in np.linspace(30, 100, num = 8)]
     
     # Learning rate
-    learning_rate = [x for x in np.linspace(0.001, 2.5, num = 20)] 
+    learning_rate = [x for x in np.linspace(0.1, 2.5, num = 10)] 
 
     
     # Create the random grid
-    random_grid = {'n_estimators': n_estimators,
+    random_grid = {'base_estimator':base_estimator,
+                   'n_estimators': n_estimators,
                    'learning_rate': learning_rate}
 
     # Use the random grid to search for best hyperparameters
@@ -380,10 +387,13 @@ def model_ADABoost(X_train, X_test, y_train, y_test):
 MODEL - 6 Bagging Classifier
 """
 def model_BaggingClassifier(X_train, X_test, y_train, y_test):
-
     
-    # Number of trees in random forest
-    n_estimators = [int(x) for x in np.linspace(10, 150, num = 20)]
+    # Different kinds of weak learners
+    base_estimator = [DecisionTreeClassifier(criterion="entropy", max_depth = 8),MultinomialNB(),
+                      LogisticRegression(solver='saga', n_jobs=-1,penalty='l2'),SVC(gamma='auto')]
+    
+    # Number of trees in Bagging
+    n_estimators = [20, 40, 60, 80, 100, 120]]
     
     # The number of samples to draw from X to train each base estimator.
     max_samples = [1, 2, 5, 10, 25]
@@ -395,7 +405,8 @@ def model_BaggingClassifier(X_train, X_test, y_train, y_test):
     bootstrap = [True, False]
     
     # Create the random grid
-    random_grid = {'n_estimators': n_estimators,
+    random_grid = {'base_estimator':base_estimator,
+                   'n_estimators': n_estimators,
                    'max_samples': max_samples,
                    'max_features': max_features,
                    'bootstrap': bootstrap}
