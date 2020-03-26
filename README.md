@@ -2,7 +2,9 @@
 
 Group Members:
         (1) VASHISHT Raghav B00766425 raghav.vashisht@student-cs.fr
-        (2) KOGIAS Kleomenis B00763236 kleomenis.kogias@student-cs.fr  
+        
+        (2) KOGIAS Kleomenis B00763236 kleomenis.kogias@student-cs.fr 
+        
         (3) WANG Xiangyu B00759895 xiangyu.wang@student-cs.fr
  
  ## File/Folder Structure - 
